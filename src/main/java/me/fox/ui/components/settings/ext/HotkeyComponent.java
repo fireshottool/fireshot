@@ -6,13 +6,11 @@ import me.fox.Fireshotapp;
 import me.fox.components.Hotkey;
 import me.fox.listeners.keyboard.HotkeyComponentListener;
 import me.fox.services.HotkeyService;
-import me.fox.services.ScreenService;
 import me.fox.ui.components.settings.SettingsComponent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +42,7 @@ public class HotkeyComponent extends SettingsComponent {
         this.hotkeyLabel.setSize(180, 60);
         this.hotkeyLabel.setFont(new Font(null, Font.ITALIC, 12));
         this.addMouseListener(new me.fox.listeners.mouse.HotkeyComponentListener(this));
-        Fireshotapp.getInstance().use(ScreenService.class).getScreenshotFrame().addKeyListener(new HotkeyComponentListener(this));
+        this.addKeyListener(new HotkeyComponentListener(this));
     }
 
     public void updateHotkey(KeyEvent event) {
