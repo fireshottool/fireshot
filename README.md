@@ -26,3 +26,4 @@
 - System tray
 - Google Image Search
 - Optical character recognition (OCR) with [Tess4J](https://github.com/nguyenq/tess4j)
+- Pin screenshots
