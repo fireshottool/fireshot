@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## **Fireshotapp 0.4.0** - 2021-03-20
+
+### Added
+
+- Pin feature (Pin the screenshot in an Always-on-Top window)
+    - Pin icon
+- System tray information message, when the screenshot is copied to your clipboard
+
+### Changed
+
+- Escape and confirm as global key
+- Confirm(return) keycode changed from 13 to 10
+- Stroke style from the selection border
+
+### Fixed
+
+- Image now gets saved as alphabetic
+- Confirm hotkey works again
+- You don't have to interact with the window to be able to escape/cancel the screenshot
+
 ## **Fireshotapp 0.3.4** - 2021-03-13
 
 ### Changed
