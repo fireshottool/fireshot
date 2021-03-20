@@ -38,7 +38,7 @@ public class FileService implements Service, ConfigManager {
     private final List<File> resources = new ArrayList<>();
     private final List<String> requiredFiles = Lists.newArrayList(
             "decrease.png", "increase.png", "pencil.png", "pencilw.png", "redo.png", "undo.png",
-            "save.png", "trayIcon.png", "ocr.png", "googlesearch.png", "cross.png"
+            "save.png", "trayIcon.png", "ocr.png", "googlesearch.png", "cross.png", "pin.png"
     );
     private final List<ResourceManager> resourceManagers = new ArrayList<>();
 
