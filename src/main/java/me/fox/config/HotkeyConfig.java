@@ -15,12 +15,9 @@ import java.util.List;
 public class HotkeyConfig {
 
     private List<Hotkey> hotkeys = Lists.newArrayList(
-            new Hotkey("screenshot", "Create screenshot", 44),
-            new Hotkey("escape", "Escape", 27),
             new Hotkey("draw", "Switch to draw", 68, 17),
             new Hotkey("undo", "Undo", 90, 17),
             new Hotkey("redo", "Redo", 89, 17),
-            new Hotkey("confirm", "Confirm screenshot", 10),
             new Hotkey("zoom", "Activate zoom", 76, 17)
     );
 }
