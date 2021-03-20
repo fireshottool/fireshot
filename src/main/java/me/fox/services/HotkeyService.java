@@ -5,7 +5,6 @@ import dev.lukasl.jwinkey.enums.VirtualKey;
 import dev.lukasl.jwinkey.observables.KeyStateObservable;
 import lombok.Getter;
 import lombok.Setter;
-import me.fox.Fireshotapp;
 import me.fox.components.ConfigManager;
 import me.fox.components.Hotkey;
 import me.fox.config.Config;
@@ -49,10 +48,10 @@ public class HotkeyService implements Service, ConfigManager {
         this.drawService = drawService;
         this.drawComponent = ((ScreenshotToolbox) this.screenService.getScreenshotToolbox()).getDrawComponent();
         this.screenshotService.getScreenshotFrame().addKeyListener(this.hotkeyListener);
-        this.screenService.getDrawToolbox().addKeyListener(this.hotkeyListener);
-        this.screenService.getScreenshotToolbox().addKeyListener(this.hotkeyListener);
 
         this.listenSnapshot();
+        this.listenEscape();
+        this.listenEnter();
         this.registerHotkeys();
     }
 
@@ -92,12 +91,9 @@ public class HotkeyService implements Service, ConfigManager {
     }
 
     private void registerHotkeys() {
-        this.hotkeyMap.put("screenshot", this::screenshot);
-        this.hotkeyMap.put("escape", this::escape);
         this.hotkeyMap.put("draw", this::draw);
         this.hotkeyMap.put("redo", this::redo);
         this.hotkeyMap.put("undo", this::undo);
-        this.hotkeyMap.put("confirm", this::confirm);
         this.hotkeyMap.put("zoom", this::zoom);
     }
 
@@ -106,7 +102,25 @@ public class HotkeyService implements Service, ConfigManager {
         KeyStateObservable keyStateObservable = KeyStateObservable.of(VirtualKey.VK_SNAPSHOT.getVirtualKeyCode());
         keyStateObservable.subscribe(update -> {
             if (update.getKeyState() == KeyState.PRESSED)
-                Fireshotapp.getInstance().use(ScreenService.class).show();
+                this.screenshot();
+        });
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private void listenEscape() {
+        KeyStateObservable keyStateObservable = KeyStateObservable.of(VirtualKey.VK_ESCAPE.getVirtualKeyCode());
+        keyStateObservable.subscribe(update -> {
+            if (update.getKeyState() == KeyState.PRESSED)
+                this.escape();
+        });
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private void listenEnter() {
+        KeyStateObservable keyStateObservable = KeyStateObservable.of(VirtualKey.VK_RETURN.getVirtualKeyCode());
+        keyStateObservable.subscribe(update -> {
+            if (update.getKeyState() == KeyState.PRESSED)
+                this.confirm();
         });
     }
 
