@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -97,6 +98,10 @@ public class ScreenshotToolbox extends Toolbox {
         this.addComponent(this.confirmComponent);
     }
 
+    private Image readAndScaleImage(File file) throws IOException {
+        return ImageIO.read(file).getScaledInstance(26, 26, Image.SCALE_SMOOTH);
+    }
+
     @Override
     public void resetResources() {
         this.drawComponent.setIcon(null);
@@ -123,23 +128,27 @@ public class ScreenshotToolbox extends Toolbox {
             try {
                 if (var.getName().equals("save.png")) {
                     this.confirmComponent.setIcon(new ImageIcon(
-                            ImageIO.read(var).getScaledInstance(26, 26, Image.SCALE_SMOOTH)
+                            this.readAndScaleImage(var)
                     ));
                 } else if (var.getName().equals("pencil.png")) {
                     this.drawComponent.setIcon(new ImageIcon(
-                            ImageIO.read(var).getScaledInstance(26, 26, Image.SCALE_SMOOTH)
+                            this.readAndScaleImage(var)
                     ));
                 } else if (var.getName().equals("ocr.png")) {
                     this.textRecognitionComponent.setIcon(new ImageIcon(
-                            ImageIO.read(var).getScaledInstance(26, 26, Image.SCALE_SMOOTH)
+                            this.readAndScaleImage(var)
                     ));
                 } else if (var.getName().equals("googlesearch.png")) {
                     this.googleSearchComponent.setIcon(new ImageIcon(
-                            ImageIO.read(var).getScaledInstance(26, 26, Image.SCALE_SMOOTH)
+                            this.readAndScaleImage(var)
                     ));
                 } else if (var.getName().equals("cross.png")) {
                     this.cancelComponent.setIcon(new ImageIcon(
-                            ImageIO.read(var).getScaledInstance(26, 26, Image.SCALE_SMOOTH)
+                            this.readAndScaleImage(var)
+                    ));
+                } else if (var.getName().equals("pin.png")) {
+                    this.pinScreenshotComponent.setIcon(new ImageIcon(
+                            this.readAndScaleImage(var)
                     ));
                 }
             } catch (Exception e) {
