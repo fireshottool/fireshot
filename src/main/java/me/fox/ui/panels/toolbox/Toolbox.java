@@ -14,6 +14,7 @@ import me.fox.ui.components.toolbox.ToolboxComponent;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -95,6 +96,33 @@ public abstract class Toolbox extends JPanel implements ResourceManager {
                 break;
         }
         this.setLocation(x, y);
+    }
+
+    /**
+     * Register a new {@link MouseAdapter} to the {@link JPanel}.
+     *
+     * @param mouseListenerAdapter to register
+     */
+    public void registerMouseListener(MouseAdapter mouseListenerAdapter) {
+        this.addMouseListener(mouseListenerAdapter);
+        this.addMouseMotionListener(mouseListenerAdapter);
+        this.addMouseWheelListener(mouseListenerAdapter);
+    }
+
+    /**
+     * Hides the {@link Toolbox}.
+     */
+    public void hideSelf() {
+        this.setVisible(false);
+    }
+
+    /**
+     * Updates the location of the {@link Toolbox}.
+     * Shows the {@link Toolbox}.
+     */
+    public void showSelf() {
+        this.updateLocation(Fireshotapp.getInstance().use(ScreenshotService.class).getSelectionRectangle());
+        this.setVisible(true);
     }
 
     /**
@@ -186,31 +214,10 @@ public abstract class Toolbox extends JPanel implements ResourceManager {
         return height.get();
     }
 
-    /**
-     * Register a new {@link MouseAdapter} to the {@link JPanel}.
-     *
-     * @param mouseListenerAdapter to register
-     */
-    public void registerMouseListener(MouseAdapter mouseListenerAdapter) {
-        this.addMouseListener(mouseListenerAdapter);
-        this.addMouseMotionListener(mouseListenerAdapter);
-        this.addMouseWheelListener(mouseListenerAdapter);
-    }
-
-    /**
-     * Hides the {@link Toolbox}.
-     */
-    public void hideSelf() {
-        this.setVisible(false);
-    }
-
-    /**
-     * Updates the location of the {@link Toolbox}.
-     * Shows the {@link Toolbox}.
-     */
-    public void showSelf() {
-        this.updateLocation(Fireshotapp.getInstance().use(ScreenshotService.class).getSelectionRectangle());
-        this.setVisible(true);
+    @Override
+    public void addKeyListener(KeyListener listener) {
+        super.addKeyListener(listener);
+        this.toolboxComponents.forEach(var -> var.addKeyListener(listener));
     }
 
     @Override
