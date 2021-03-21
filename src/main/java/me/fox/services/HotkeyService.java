@@ -48,6 +48,8 @@ public class HotkeyService implements Service, ConfigManager {
         this.drawService = drawService;
         this.drawComponent = ((ScreenshotToolbox) this.screenService.getScreenshotToolbox()).getDrawComponent();
         this.screenshotService.getScreenshotFrame().addKeyListener(this.hotkeyListener);
+        this.screenService.getDrawToolbox().addKeyListener(this.hotkeyListener);
+        this.screenService.getScreenshotToolbox().addKeyListener(this.hotkeyListener);
 
         this.listenSnapshot();
         this.listenEscape();
