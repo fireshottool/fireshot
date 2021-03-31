@@ -3,7 +3,6 @@ package me.fox.listeners.mouse;
 import lombok.Getter;
 import me.fox.Fireshotapp;
 import me.fox.services.ScreenService;
-import me.fox.services.ScreenshotService;
 import me.fox.ui.components.ScalableRectangle;
 
 import java.awt.*;
