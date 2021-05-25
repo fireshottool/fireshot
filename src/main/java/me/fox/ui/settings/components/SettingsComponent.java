@@ -18,21 +18,55 @@
 
 package me.fox.ui.settings.components;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ObjectPropertyBase;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 19.11.2020)
+ * @version (~ 10.04.2021)
  */
 
+@Getter
+@Setter
+public abstract class SettingsComponent<T extends Event> extends HBox {
 
-public abstract class SettingsComponent extends JPanel {
+    private final Label label;
+    private ObjectProperty<EventHandler<T>> onAction = new ObjectPropertyBase<EventHandler<T>>() {
+        @Override
+        public Object getBean() {
+            return this;
+        }
 
-    public SettingsComponent(Point location) {
-        this.setSize(400, 70);
-        this.setLocation(location);
-        this.setVisible(true);
-        this.setLayout(null);
+        @Override
+        public String getName() {
+            return "onAction";
+        }
+    };
+
+    public SettingsComponent(String text) {
+        this.label = new Label(text);
+        this.label.setPrefWidth(200);
+        this.setSpacing(40);
+
+        this.getChildren().add(this.label);
+    }
+
+    /***************************************************************************
+     *                                                                         *
+     * Properties                                                              *
+     *                                                                         *
+     **************************************************************************/
+    public final ObjectProperty<EventHandler<T>> onActionProperty() {
+        return onAction;
+    }
+
+    public final EventHandler<T> getOnAction() {
+        return onActionProperty().get();
     }
 }
