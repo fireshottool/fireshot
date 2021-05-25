@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Fireshotapp is an easy to use screenshot program
+  ~     Copyright (C) 2021  Ausgefuchster
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import me.fox.ui.settings.components.ext.*?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="me.fox.ui.settings.controller.page.ext.AppearancePageController"
+            hbarPolicy="NEVER"
+            visible="false" managed="false">
+    <VBox spacing="40" fx:id="container">
+
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="title">Screenshot window</Label>
+            <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
+        </HBox>
+        <ColorPickerComponent
+                fx:id="dimColor"
+                text="Dim Color: "
+                onAction="#dimColorChanged"
+                onChangeAction="#customColorsChanged"
+        />
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="title">Screenshot zoom</Label>
+            <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
+        </HBox>
+        <ColorPickerComponent
+                fx:id="zoomMiddleRectColor"
+                text="Zoom Rectangle Color: "
+                onAction="#zoomRectangleColorChanged"
+                onChangeAction="#customColorsChanged"
+        />
+        <ColorPickerComponent
+                fx:id="zoomBorderColor"
+                text="Zoom Border Color: "
+                onAction="#zoomBorderColorChanged"
+                onChangeAction="#customColorsChanged"
+        />
+        <ColorPickerComponent
+                fx:id="zoomCrossColor"
+                text="Zoom Cross Color: "
+                onAction="#zoomCrossColorChanged"
+                onChangeAction="#customColorsChanged"
+        />
+        <ColorPickerComponent
+                fx:id="zoomGridColor"
+                text="Zoom Grid Color: "
+                onAction="#zoomGridColorChanged"
+                onChangeAction="#customColorsChanged"
+        />
+
+        <ToggleSwitchComponent
+                fx:id="zoom"
+                text="Show zoom"
+                onAction="#showZoomChanged"
+        />
+        <ToggleSwitchComponent
+                fx:id="zoomMiddleRect"
+                text="Show zoom middle rectangle"
+                onAction="#zoomMiddleRectChanged"
+        />
+        <ToggleSwitchComponent
+                fx:id="zoomCross"
+                text="Show zoom cross"
+                onAction="#zoomCrossChanged"
+        />
+        <ToggleSwitchComponent
+                fx:id="zoomGrid"
+                text="Show zoom grid"
+                onAction="#zoomGridChanged"
+        />
+
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="title">Image pin window</Label>
+            <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
+        </HBox>
+        <DoubleSpinnerComponent
+                fx:id="dropShadow"
+                text="Image pin drop shadow radius"
+                spinnerMin="0"
+                spinnerMax="-1"
+                spinnerInitial="5.00"
+                onAction="#dropShadowRadiusChanged"
+        />
+
+        <ColorPickerComponent
+                fx:id="dropShadowColor"
+                text="Image pin drop shadow color"
+                onAction="#dropShadowColorChanged"
+                onChangeAction="#customColorsChanged"
+        />
+    </VBox>
+</ScrollPane>
