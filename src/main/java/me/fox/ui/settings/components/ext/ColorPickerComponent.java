@@ -74,6 +74,10 @@ public class ColorPickerComponent extends SettingsComponent<ColorChangeEvent> {
         return onChangeAction;
     }
 
+    public final void setOnChangeAction(EventHandler<ColorListChangeEvent> value) {
+        onChangeActionProperty().set(value);
+    }
+
     public final EventHandler<ColorListChangeEvent> getOnChangeAction() {
         return onChangeActionProperty().get();
     }
