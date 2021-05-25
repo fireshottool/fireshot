@@ -28,6 +28,6 @@ import lombok.Data;
 @Data
 public class ImagePinConfig {
 
-    private double shadowRadius = 5.0;
+    private double shadowRadius = 10.0;
     private String color = "#ffffff";
 }
