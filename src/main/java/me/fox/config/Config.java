@@ -35,5 +35,6 @@ public class Config {
     private final UpdateConfig updateConfig = new UpdateConfig();
     private final RequestConfig requestConfig = new RequestConfig();
     private final ImagePinConfig imagePinConfig = new ImagePinConfig();
+    private final SettingsConfig settingsConfig = new SettingsConfig();
     private final ScreenshotConfig screenshotConfig = new ScreenshotConfig();
 }
