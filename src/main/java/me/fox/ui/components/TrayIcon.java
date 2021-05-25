@@ -18,6 +18,7 @@
 
 package me.fox.ui.components;
 
+import javafx.application.Platform;
 import lombok.Getter;
 import lombok.Setter;
 import me.fox.Fireshotapp;
@@ -145,7 +146,7 @@ public class TrayIcon extends java.awt.TrayIcon implements ResourceManager, Conf
     }
 
     private void settingsItemActionPerformed(ActionEvent event) {
-        Fireshotapp.getInstance().use(ScreenService.class).getSettingsFrame().setVisible(true);
+        Platform.runLater(() -> Fireshotapp.getInstance().use(ScreenService.class).getSettingsWindow().show());
     }
 
     private void localSaveItemStateChanged(ItemEvent event) {
