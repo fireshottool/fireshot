@@ -18,84 +18,89 @@
 
 package me.fox.ui.settings.components.ext;
 
+import javafx.beans.NamedArg;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ObjectPropertyBase;
+import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.paint.Color;
 import lombok.Getter;
-import me.fox.Fireshotapp;
-import me.fox.services.DrawService;
-import me.fox.ui.components.settings.FoldEdgeLabel;
-import me.fox.ui.components.settings.SettingsComponent;
-import me.fox.ui.frames.ColorPickerDialog;
+import lombok.NonNull;
+import me.fox.ui.settings.components.SettingsComponent;
+import me.fox.ui.settings.events.ColorChangeEvent;
+import me.fox.ui.settings.events.ColorListChangeEvent;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 21.11.2020)
+ * @version (~ 18.04.2021)
  */
 
-
 @Getter
-public class ColorPickerComponent extends SettingsComponent {
+public class ColorPickerComponent extends SettingsComponent<ColorChangeEvent> {
 
-    private final FoldEdgeLabel foldEdgeLabel;
-    private final JLabel label;
-    private final JButton button;
-    private final ColorPickerDialog colorPickerDialog;
+    private final ColorPicker colorPicker = new ColorPicker();
+    private final ObjectProperty<EventHandler<ColorListChangeEvent>> onChangeAction = new ObjectPropertyBase<EventHandler<ColorListChangeEvent>>() {
+        @Override
+        public Object getBean() {
+            return this;
+        }
 
-    public ColorPickerComponent(String label, Point location, ActionListener colorChangedListener, JFrame frame) {
-        super(location);
+        @Override
+        public String getName() {
+            return "onChangeAction";
+        }
+    };
 
-        this.foldEdgeLabel = new FoldEdgeLabel(Color.red.toString());
-        this.label = new JLabel(label);
-        this.button = new JButton("Choose color");
-        this.colorPickerDialog = new ColorPickerDialog(frame, this::colorChanged);
+    public ColorPickerComponent(@NamedArg("text") String text) {
+        super(text);
 
-        this.getColorPickerDialog().getOk().addActionListener(colorChangedListener);
-        this.getColorPickerDialog().getCancel().addActionListener(this::cancelPerformed);
-
-        this.setupLabel();
-        this.setupButton();
+        super.getChildren().add(this.colorPicker);
+        this.colorPicker.getCustomColors().addListener(this::onChanged);
+        this.colorPicker.setOnAction(event -> super.getOnAction().handle(new ColorChangeEvent(
+                this,
+                this.colorPicker.getValue()))
+        );
     }
 
-    private void setupLabel() {
-        this.label.setLocation(5, 10);
-        this.label.setSize(100, 60);
-        this.add(foldEdgeLabel);
-        this.foldEdgeLabel.setLocation(80, 10);
-        this.foldEdgeLabel.setSize(100, 60);
-        this.foldEdgeLabel.setColor(Color.red);
-        this.add(label);
+    /***************************************************************************
+     *                                                                         *
+     * Properties                                                              *
+     *                                                                         *
+     **************************************************************************/
+    public final ObjectProperty<EventHandler<ColorListChangeEvent>> onChangeActionProperty() {
+        return onChangeAction;
     }
 
-    private void setupButton() {
-        this.button.setLocation(200, 30);
-        this.button.setSize(100, 30);
-        this.add(button);
-        this.button.addActionListener(this::actionPerformed);
+    public final EventHandler<ColorListChangeEvent> getOnChangeAction() {
+        return onChangeActionProperty().get();
     }
 
-    private void actionPerformed(ActionEvent event) {
-        this.colorPickerDialog.setVisible(true);
-    }
-
-    private void cancelPerformed(ActionEvent event) {
-        this.colorPickerDialog.setVisible(false);
-        this.foldEdgeLabel.setColor(Fireshotapp.getInstance().use(DrawService.class).getDrawColor());
-    }
-
-    private void colorChanged(ChangeEvent event) {
-        this.setColor(this.colorPickerDialog.getColorPicker().getColor());
-    }
-
-    public Color getColor() {
-        return this.foldEdgeLabel.getColor();
+    private void onChanged(ListChangeListener.Change<? extends Color> change) {
+        if (this.getOnChangeAction() != null)
+            this.getOnChangeAction().handle(
+                    new ColorListChangeEvent(
+                            this,
+                            change
+                    )
+            );
     }
 
     public void setColor(Color color) {
-        this.foldEdgeLabel.setColor(color);
-        this.colorPickerDialog.setColor(color);
+        this.colorPicker.setValue(color);
+    }
+
+    public void setColor(@NonNull String color) {
+        try {
+            this.setColor(Color.web(color));
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    public void setCustomColors(List<Color> customColors) {
+        this.getColorPicker().getCustomColors().clear();
+        this.getColorPicker().getCustomColors().addAll(customColors);
     }
 }
