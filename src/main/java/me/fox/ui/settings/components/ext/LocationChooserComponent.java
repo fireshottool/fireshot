@@ -18,60 +18,52 @@
 
 package me.fox.ui.settings.components.ext;
 
-import com.sun.javafx.application.PlatformImpl;
+import javafx.beans.NamedArg;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.stage.DirectoryChooser;
 import lombok.Getter;
-import me.fox.Fireshotapp;
-import me.fox.services.JsonService;
-import me.fox.ui.components.settings.SettingsComponent;
+import me.fox.ui.settings.components.SettingsComponent;
+import me.fox.ui.settings.events.FileLocationChangeEvent;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
+
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 01.12.2020)
+ * @version (~ 09.04.2021)
  */
 
 @Getter
-public class LocationChooserComponent extends SettingsComponent {
+public class LocationChooserComponent extends SettingsComponent<FileLocationChangeEvent> {
 
-    private final JButton button;
-    private final JLabel label;
-    private final String labelText;
+    private final DirectoryChooser directoryChooser = new DirectoryChooser();
+    private final String text;
 
-    private final DirectoryChooser fileChooser = new DirectoryChooser();
+    public LocationChooserComponent(@NamedArg("text") String text) {
+        super(text);
+        Button button = new Button("Choose Location");
+        button.setMinWidth(105);
 
-    public LocationChooserComponent(Point location, String label) {
-        super(location);
+        this.text = text;
 
-        this.labelText = label;
-        this.button = new JButton("Choose Location");
-        this.button.setSize(120, 30);
-        this.button.setLocation(20, 40);
-        this.label = new JLabel(label);
-        this.label.setLocation(10, 0);
-        this.label.setSize(350, 60);
-
-        this.add(this.button);
-        this.add(this.label);
-        this.button.addActionListener(this::actionPerformed);
-    }
-
-    public void setLocationText(String string) {
-        this.label.setText(labelText + string);
-    }
-
-    private void actionPerformed(ActionEvent event) {
-        PlatformImpl.startup(() -> {
-            File file = this.fileChooser.showDialog(null);
+        this.getChildren().add(button);
+        this.setSpacing(40);
+        button.setOnAction(event -> {
+            File file = this.directoryChooser.showDialog(null);
             if (file == null) return;
-            JsonService jsonService = Fireshotapp.getInstance().use(JsonService.class);
             String filePath = file.toString();
-            jsonService.getConfig().getFileConfig().setImageLocation(filePath);
-            this.label.setText(labelText + filePath);
+            super.getLabel().setText(this.text + filePath);
+            super.getLabel().setTooltip(new Tooltip(super.getLabel().getText()));
+            super.getOnAction().handle(
+                    new FileLocationChangeEvent(this, file)
+            );
         });
+    }
+
+    public void setInitialDirectory(String path) {
+        this.directoryChooser.setInitialDirectory(new File(path));
+        super.getLabel().setText(this.text + path);
+        super.getLabel().setTooltip(new Tooltip(super.getLabel().getText()));
     }
 }
