@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Fireshotapp is an easy to use screenshot program
+  ~     Copyright (C) 2021  Ausgefuchster
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="me.fox.ui.settings.controller.SettingsController"
+      stylesheets="@./css/style.css">
+    <VBox fx:id="container" spacing="10">
+        <BorderPane>
+            <center>
+                <SplitPane fx:id="splitPane" id="splitPane"
+                           prefHeight="10000"
+                           prefWidth="1025.0" dividerPositions="0.2"/>
+            </center>
+            <bottom>
+                <AnchorPane>
+                    <ButtonBar AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="5">
+                        <buttons>
+                            <Button onAction="#save">Save</Button>
+                            <Button onAction="#cancel">Cancel</Button>
+                            <Button onAction="#apply">Apply</Button>
+                        </buttons>
+
+                        <padding>
+                            <Insets right="20.0"/>
+                        </padding>
+                    </ButtonBar>
+                </AnchorPane>
+            </bottom>
+        </BorderPane>
+    </VBox>
+</VBox>

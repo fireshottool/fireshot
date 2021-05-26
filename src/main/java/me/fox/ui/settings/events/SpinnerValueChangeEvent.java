@@ -16,25 +16,24 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fox.config;
+package me.fox.ui.settings.events;
 
-import lombok.Data;
+import javafx.event.Event;
+import lombok.Getter;
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 15.11.2020)
+ * @version (~ 04.05.2021)
  */
 
-@Data
-public class Config {
-    public static final Config DEFAULT_CONFIG = new Config();
 
-    private final FileConfig fileConfig = new FileConfig();
-    private final DrawConfig drawConfig = new DrawConfig();
-    private final HotkeyConfig hotkeyConfig = new HotkeyConfig();
-    private final UpdateConfig updateConfig = new UpdateConfig();
-    private final RequestConfig requestConfig = new RequestConfig();
-    private final ImagePinConfig imagePinConfig = new ImagePinConfig();
-    private final SettingsConfig settingsConfig = new SettingsConfig();
-    private final ScreenshotConfig screenshotConfig = new ScreenshotConfig();
+@Getter
+public class SpinnerValueChangeEvent<T extends Number> extends Event {
+
+    private final T newValue;
+
+    public SpinnerValueChangeEvent(Object source, T newValue) {
+        super(source, null, null);
+        this.newValue = newValue;
+    }
 }

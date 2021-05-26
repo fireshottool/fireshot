@@ -25,10 +25,10 @@ import me.fox.components.ResourceManager;
 import me.fox.config.Config;
 import me.fox.ui.frames.ImagePinFrame;
 import me.fox.ui.frames.ScreenshotFrame;
-import me.fox.ui.frames.SettingsFrame;
 import me.fox.ui.panels.toolbox.Toolbox;
 import me.fox.ui.panels.toolbox.ext.DrawToolbox;
 import me.fox.ui.panels.toolbox.ext.ScreenshotToolbox;
+import me.fox.ui.settings.SettingsWindow;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -49,7 +49,7 @@ public class ScreenService implements Service, ResourceManager {
     private final ScreenshotService screenshotService;
     private final Toolbox drawToolbox;
     private final Toolbox screenshotToolbox = new ScreenshotToolbox();
-    private final SettingsFrame settingsFrame = new SettingsFrame();
+    private final SettingsWindow settingsWindow = new SettingsWindow();
     private final ImagePinFrame imagePinFrame = new ImagePinFrame();
 
     /**
@@ -77,7 +77,6 @@ public class ScreenService implements Service, ResourceManager {
     public void show() {
         this.screenshotService.createScreenshot();
         this.screenshotFrame.setVisible(true);
-        this.screenshotFrame.requestFocus();
     }
 
     /**
@@ -137,7 +136,7 @@ public class ScreenService implements Service, ResourceManager {
 
     @Override
     public void applyConfig(Config config) {
-        this.settingsFrame.applyConfig(config);
+        this.settingsWindow.applyConfig(config);
         this.imagePinFrame.applyConfig(config);
     }
 }

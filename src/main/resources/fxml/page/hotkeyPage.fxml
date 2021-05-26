@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Fireshotapp is an easy to use screenshot program
+  ~     Copyright (C) 2021  Ausgefuchster
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="me.fox.ui.settings.controller.page.ext.HotkeyPageController"
+            fx:id="scrollPane"
+            visible="false" managed="false">
+    <HBox alignment="CENTER_LEFT">
+        <Label styleClass="title">Hotkeys</Label>
+        <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
+    </HBox>
+    <VBox fx:id="container"/>
+</ScrollPane>

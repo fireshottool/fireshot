@@ -16,25 +16,35 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fox.config;
+package me.fox.ui.settings.controller.page.ext;
 
-import lombok.Data;
+import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
+import me.fox.config.Config;
+import me.fox.ui.settings.components.ext.HotkeyComponent;
+import me.fox.ui.settings.controller.page.PageController;
+
+import java.util.stream.Collectors;
+
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 15.11.2020)
+ * @version (~ 13.05.2021)
  */
 
-@Data
-public class Config {
-    public static final Config DEFAULT_CONFIG = new Config();
+public class HotkeyPageController extends PageController {
 
-    private final FileConfig fileConfig = new FileConfig();
-    private final DrawConfig drawConfig = new DrawConfig();
-    private final HotkeyConfig hotkeyConfig = new HotkeyConfig();
-    private final UpdateConfig updateConfig = new UpdateConfig();
-    private final RequestConfig requestConfig = new RequestConfig();
-    private final ImagePinConfig imagePinConfig = new ImagePinConfig();
-    private final SettingsConfig settingsConfig = new SettingsConfig();
-    private final ScreenshotConfig screenshotConfig = new ScreenshotConfig();
+    @FXML
+    private VBox container;
+
+    @Override
+    public void applyConfig(Config config) {
+        if (this.container.getChildren().size() != 0) return;
+        this.container.setSpacing(40);
+        this.container.getChildren().addAll(
+                config.getHotkeyConfig().getHotkeys()
+                        .stream()
+                        .map(HotkeyComponent::new).collect(Collectors.toList())
+        );
+    }
 }

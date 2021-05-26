@@ -16,25 +16,25 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fox.config;
+package me.fox.ui.settings.events;
 
-import lombok.Data;
+import javafx.event.Event;
+import lombok.Getter;
+
+import java.io.File;
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 15.11.2020)
+ * @version (~ 05.05.2021)
  */
 
-@Data
-public class Config {
-    public static final Config DEFAULT_CONFIG = new Config();
+@Getter
+public class FileLocationChangeEvent extends Event {
 
-    private final FileConfig fileConfig = new FileConfig();
-    private final DrawConfig drawConfig = new DrawConfig();
-    private final HotkeyConfig hotkeyConfig = new HotkeyConfig();
-    private final UpdateConfig updateConfig = new UpdateConfig();
-    private final RequestConfig requestConfig = new RequestConfig();
-    private final ImagePinConfig imagePinConfig = new ImagePinConfig();
-    private final SettingsConfig settingsConfig = new SettingsConfig();
-    private final ScreenshotConfig screenshotConfig = new ScreenshotConfig();
+    private final File file;
+
+    public FileLocationChangeEvent(Object source, File file) {
+        super(source, null, null);
+        this.file = file;
+    }
 }

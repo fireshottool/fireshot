@@ -16,27 +16,25 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fox.listeners.mouse;
+package me.fox.ui.settings.events;
 
-import lombok.AllArgsConstructor;
-import me.fox.ui.components.settings.FoldEdgeLabel;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javafx.collections.ListChangeListener;
+import javafx.event.Event;
+import javafx.scene.paint.Color;
+import lombok.Getter;
 
 /**
  * @author (Ausgefuchster)
- * @version (~ 21.11.2020)
+ * @version (~ 05.05.2021)
  */
-@AllArgsConstructor
-public class FoldEdgeLabelListener extends MouseAdapter {
 
-    private final FoldEdgeLabel foldEdgeLabel;
+@Getter
+public class ColorListChangeEvent extends Event {
 
-    @Override
-    public void mouseClicked(MouseEvent event) {
-        if (foldEdgeLabel.makeEdge().contains(event.getPoint())) {
-            this.foldEdgeLabel.switchColorDisplay();
-        }
+    private final ListChangeListener.Change<? extends Color> change;
+
+    public ColorListChangeEvent(Object source, ListChangeListener.Change<? extends Color> change) {
+        super(source, null, null);
+        this.change = change;
     }
 }

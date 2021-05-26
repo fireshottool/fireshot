@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Fireshotapp is an easy to use screenshot program
+  ~     Copyright (C) 2021  Ausgefuchster
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import me.fox.ui.settings.components.ext.ColorPickerComponent?>
+<?import me.fox.ui.settings.components.ext.IntegerSpinnerComponent?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="me.fox.ui.settings.controller.page.ext.DrawPageController"
+      spacing="40" visible="false" managed="false">
+
+    <HBox alignment="CENTER_LEFT">
+        <Label styleClass="title" minWidth="54">Draw</Label>
+        <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
+    </HBox>
+    <IntegerSpinnerComponent
+            fx:id="defaultThickness"
+            text="Default pencil thickness: "
+            spinnerMin="0"
+            spinnerMax="-1"
+            spinnerInitial="5"
+            onAction="#defaultThicknessChanged"
+    />
+
+    <IntegerSpinnerComponent
+            fx:id="increaseThickness"
+            text="Increase thickness by: "
+            spinnerMin="0"
+            spinnerMax="-1"
+            spinnerInitial="1"
+            onAction="#increaseThicknessChanged"
+    />
+
+    <IntegerSpinnerComponent
+            fx:id="decreaseThickness"
+            text="Decrease thickness by: "
+            spinnerMin="0"
+            spinnerMax="-1"
+            spinnerInitial="1"
+            onAction="#decreaseThicknessChanged"
+    />
+
+    <ColorPickerComponent
+            fx:id="drawColor"
+            text="Draw color: "
+            onAction="#drawColorChanged"
+            onChangeAction="#customColorsChanged"
+    />
+</VBox>

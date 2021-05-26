@@ -20,21 +20,17 @@ package me.fox.config;
 
 import lombok.Data;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * @author (Ausgefuchster)
- * @version (~ 15.11.2020)
+ * @version (~ 14.05.2021)
  */
 
 @Data
-public class Config {
-    public static final Config DEFAULT_CONFIG = new Config();
+public class SettingsConfig {
 
-    private final FileConfig fileConfig = new FileConfig();
-    private final DrawConfig drawConfig = new DrawConfig();
-    private final HotkeyConfig hotkeyConfig = new HotkeyConfig();
-    private final UpdateConfig updateConfig = new UpdateConfig();
-    private final RequestConfig requestConfig = new RequestConfig();
-    private final ImagePinConfig imagePinConfig = new ImagePinConfig();
-    private final SettingsConfig settingsConfig = new SettingsConfig();
-    private final ScreenshotConfig screenshotConfig = new ScreenshotConfig();
+    private Set<String> customColors = new LinkedHashSet<>();
+    private String lastPane = "Appearance";
 }
