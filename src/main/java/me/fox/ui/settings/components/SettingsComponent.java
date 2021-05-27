@@ -37,7 +37,9 @@ import lombok.Setter;
 public abstract class SettingsComponent<T extends Event> extends HBox {
 
     private final Label label;
+
     private ObjectProperty<EventHandler<T>> onAction = new ObjectPropertyBase<EventHandler<T>>() {
+
         @Override
         public Object getBean() {
             return this;
@@ -57,16 +59,15 @@ public abstract class SettingsComponent<T extends Event> extends HBox {
         this.getChildren().add(this.label);
     }
 
-    /***************************************************************************
-     *                                                                         *
-     * Properties                                                              *
-     *                                                                         *
-     **************************************************************************/
     public final ObjectProperty<EventHandler<T>> onActionProperty() {
         return onAction;
     }
 
     public final EventHandler<T> getOnAction() {
         return onActionProperty().get();
+    }
+
+    public final void setOnAction(EventHandler<T> value) {
+        onActionProperty().set(value);
     }
 }
