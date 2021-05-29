@@ -26,11 +26,14 @@
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="me.fox.ui.settings.controller.page.ext.HotkeyPageController"
-            fx:id="scrollPane"
+            hbarPolicy="NEVER"
             visible="false" managed="false">
-    <HBox alignment="CENTER_LEFT">
-        <Label styleClass="title">Hotkeys</Label>
-        <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
-    </HBox>
-    <VBox fx:id="container"/>
+    <VBox spacing="40">
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="title">Hotkeys</Label>
+            <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
+        </HBox>
+        <VBox fx:id="container"/>
+    </VBox>
+
 </ScrollPane>
