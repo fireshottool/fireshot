@@ -2,12 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## **Fireshotapp 0.4.1** - 2021-5-29
+
+### Changed
+
+- Toolbox now only shows when selection width and height are greater than 0
+- Point in drawing now fits to the stroke size
+- Settings ui update
+- New settings options for:
+  - Color picker for Zoom (middle rectangle, border, cross and grid)
+  - Toggle option for Zoom (middle rectangle, cross, and grid)
+  - Image pin drop shadow (color and radius)
+
+### Fixed
+
+- Hotkeys work again after using something from the toolboxes
+- Zoom on multiple monitors
+
 ## **Fireshotapp 0.4.0** - 2021-03-20
 
 ### Added
 
 - Pin feature (Pin the screenshot in an Always-on-Top window)
-    - Pin icon
+  - Pin icon
 - System tray information message, when the screenshot is copied to your clipboard
 
 ### Changed
