@@ -31,7 +31,7 @@
       spacing="40" visible="false" managed="false">
 
     <HBox alignment="CENTER_LEFT">
-        <Label styleClass="title">Screenshot</Label>
+        <Label styleClass="title" minWidth="114">Screenshot</Label>
         <Line styleClass="spaceLine" startX="10" endX="100000" startY="100" endY="100"/>
     </HBox>
     <LocationChooserComponent
