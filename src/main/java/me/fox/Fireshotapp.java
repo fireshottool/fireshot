@@ -46,7 +46,7 @@ public class Fireshotapp extends Application {
     @Getter
     private static Fireshotapp instance;
 
-    public static final Version VERSION = new Version("0.4.0");
+    public static final Version VERSION = new Version("0.4.1");
     private final ListeningExecutorService executorService = MoreExecutors.listeningDecorator(Executors.newScheduledThreadPool(2));
 
     private final Map<Class<? extends Service>, Service> services = new HashMap<>();
