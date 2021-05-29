@@ -28,6 +28,7 @@ import me.fox.services.ScreenshotService;
 import me.fox.ui.components.draw.Drawable;
 import me.fox.ui.frames.ScreenshotFrame;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
@@ -80,6 +81,16 @@ public class ImageZoom implements Drawable {
 
         if (this.grid)
             this.drawGrid(g2d, point);
+
+        int middle = (this.size / 2) - (this.pixelSize / 2);
+        if (this.middleRect) {
+            g2d.setColor(this.middleRectColor);
+            g2d.drawRect(point.x + middle, point.y + middle, this.pixelSize, this.pixelSize);
+        }
+
+
+        if (this.cross)
+            this.drawCross(g2d, point, middle);
         g2d.setClip(null);
         g2d.setStroke(Strokes.WIDTH_TWO_STROKE);
         g2d.setColor(this.borderColor);
@@ -93,14 +104,6 @@ public class ImageZoom implements Drawable {
             g2d.drawRect(point.x + i, point.y, this.pixelSize, this.size);
             g2d.drawRect(point.x, point.y + i, this.size, this.pixelSize);
         }
-
-        if (!this.middleRect) return;
-        int middle = (this.size / 2) - (this.pixelSize / 2);
-        g2d.setColor(this.middleRectColor);
-        g2d.drawRect(point.x + middle, point.y + middle, this.pixelSize, this.pixelSize);
-
-        if (this.cross)
-            this.drawCross(g2d, point, middle);
     }
 
     private void drawCross(Graphics2D g2d, Point point, int middle) {
@@ -139,6 +142,7 @@ public class ImageZoom implements Drawable {
     @Override
     public void draw(Graphics2D g2d) {
         Point point = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(point, Fireshotapp.getInstance().getScreenshotFrame());
         g2d.setStroke(Strokes.WIDTH_ONE_STROKE);
         if (Fireshotapp.getInstance().use(ScreenshotService.class).isZoom() &&
                 !Fireshotapp.getInstance().use(DrawService.class).isDraw())
