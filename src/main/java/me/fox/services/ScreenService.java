@@ -105,8 +105,8 @@ public class ScreenService implements Service, ResourceManager {
 
     public void pinScreenshot() {
         BufferedImage image = this.screenshotService.takeScreenshotFromSelection();
-        imagePinFrame.showImage(image);
-        resetAndHide();
+        this.imagePinFrame.showImage(image);
+        this.resetAndHide();
     }
 
     private void reset() {
@@ -130,7 +130,7 @@ public class ScreenService implements Service, ResourceManager {
 
     @Override
     public void applyResources(List<File> files) {
-        drawToolbox.applyResources(files);
+        this.drawToolbox.applyResources(files);
         this.screenshotToolbox.applyResources(files);
     }
 
