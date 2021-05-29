@@ -61,6 +61,7 @@ public class ScreenshotFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
         this.calculateFrameSize();
+        this.setAutoRequestFocus(true);
     }
 
     /**
