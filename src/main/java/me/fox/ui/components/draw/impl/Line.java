@@ -55,14 +55,14 @@ public class Line implements Drawable {
     public void draw(Graphics2D g2d) {
         g2d.setStroke(this.getStroke());
 
-        for (int j = 0; j < this.getPoints().size(); j++) {
+        for (int i = 0; i < this.getPoints().size(); i++) {
             List<Point> points = this.getPoints();
             g2d.setColor(this.getColor());
 
-            if (j + 1 != points.size()) {
-                g2d.drawLine(points.get(j).x, points.get(j).y, points.get(j + 1).x, points.get(j + 1).y);
+            if (i + 1 != points.size()) {
+                g2d.drawLine(points.get(i).x, points.get(i).y, points.get(i + 1).x, points.get(i + 1).y);
             } else {
-                g2d.fillRect(points.get(j).x, points.get(j).y, 1, 1);
+                g2d.drawLine(points.get(i).x, points.get(i).y, points.get(i).x, points.get(i).y);
             }
         }
     }
