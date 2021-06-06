@@ -19,13 +19,19 @@
 package me.fox.ui.frames;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -43,9 +49,11 @@ import java.awt.image.BufferedImage;
 public class ImagePinFrame implements ConfigManager {
 
     private final Stage stage = new Stage();
-    private final VBox vBox = new VBox();
+    private final HBox vBox = new HBox();
     private final Scene scene = new Scene(vBox);
     private final DropShadow dropShadow = new DropShadow(10.0, Color.WHITE);
+
+    private final ImageView imageView = new ImageView();
 
     private int distanceX;
     private int distanceY;
@@ -59,24 +67,23 @@ public class ImagePinFrame implements ConfigManager {
 
         this.vBox.setEffect(dropShadow);
 
+        this.imageView.setPreserveRatio(true);
+        this.vBox.getChildren().add(imageView);
+
         this.addListener();
     }
 
 
     public void showImage(BufferedImage bufferedImage) {
         Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-        BackgroundImage backgroundImage = new BackgroundImage(
-                image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT
-        );
-        this.vBox.setBackground(new Background(backgroundImage));
-        this.vBox.setMinWidth(image.getWidth() + 20);
-        this.vBox.setMinHeight(image.getHeight() + 20);
+        this.imageView.setImage(image);
+
+        this.vBox.setAlignment(Pos.CENTER);
+        this.vBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 
         this.stage.show();
+        this.stage.setWidth(this.vBox.getWidth() + 30);
+        this.stage.setHeight(this.vBox.getHeight() + 30);
     }
 
     private void addListener() {
